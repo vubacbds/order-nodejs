@@ -1,0 +1,21 @@
+###
+POST http://localhost:5000/product/create 
+Content-Type: application/json
+
+{
+    "name": "Nước cam",
+    "description": "Rât mát",
+    "price": "15000",
+    "images": ["https://cdn.tgdd.vn/Files/2018/11/27/1134029/cong-dung-cua-nuoc-cam-tuoi-va-cach-bao-quan-nuoc-cam-tot-nhat-6.jpg", "https://cookbeo.com/media/2021/06/nuoc-cam-ep/nuoc-cam-ep.jpg" ]
+}
+
+###
+PUT http://localhost:5000/product/update/6332698673a43d173ae2de28
+Content-Type: application/json
+
+{
+    "name": "Oki cofe"
+}
+
+###
+GET http://localhost:5000/product/get 
