@@ -1,12 +1,13 @@
 ###
-POST http://localhost:5000/product/create 
+POST http://localhost:8080/product/create 
 Content-Type: application/json
 
 {
-    "name": "Nước cam",
-    "description": "Rât mát",
-    "price": "15000",
-    "images": ["https://cdn.tgdd.vn/Files/2018/11/27/1134029/cong-dung-cua-nuoc-cam-tuoi-va-cach-bao-quan-nuoc-cam-tot-nhat-6.jpg", "https://cookbeo.com/media/2021/06/nuoc-cam-ep/nuoc-cam-ep.jpg" ]
+    "name": "Coffee",
+    "description": "Siêu nét",
+    "price": "25000",
+    "amount": "0",
+    "images": ["https://nld.mediacdn.vn/2020/5/12/23723766-0-image-a-181579697765141-15892455662811158088874.jpg", "https://lepathcoffee.com/wp-content/uploads/2022/01/moi-ngay-uong-1-ly-ca-phe-co-tot-khong-768x1152.jpg" ]
 }
 
 ###

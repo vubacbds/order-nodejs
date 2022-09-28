@@ -1,6 +1,6 @@
 const express = require("express"); //Framework
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 const route = require("./routes");
 
 //Để gửi file JSON lên DB được
