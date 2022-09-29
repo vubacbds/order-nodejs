@@ -62,6 +62,20 @@ class UserController {
       });
     }
   }
+  // [POST] /user/verify
+  async verify(req, res, next) {
+    await User.findOne({ username: req.body.username }).then((user) => {
+      if (user && bcrypt.compareSync("6688", req.body.password)) {
+        res.status(200).json({
+          result: true,
+        });
+      } else {
+        res.status(500).json({
+          result: false,
+        });
+      }
+    });
+  }
 }
 
 module.exports = new UserController();
