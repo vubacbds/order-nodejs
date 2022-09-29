@@ -21,7 +21,7 @@ class ProductController {
       })
       .catch((err) => {
         res.status(500).json({
-          message: "Thêm hóa đơn thất bại!",
+          message: "Đặt thất bại!",
           error: { next },
         });
       });

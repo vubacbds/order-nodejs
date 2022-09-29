@@ -9,7 +9,7 @@ const Bill = new Schema(
     table: { type: String, default: "" },
     note: { type: String, default: "" },
     detail: [{}],
-    price: { type: Number, default: 0 },
+    total_price: { type: Number, default: 0 },
     status: { type: Boolean, default: "" },
   },
   {
