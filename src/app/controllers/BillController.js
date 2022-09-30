@@ -1,6 +1,7 @@
 const Bill = require("../models/Bill.js");
 const mailer = require("../../util/mailer");
 const moment = require("moment"); //Định dạng thời gian
+require("dotenv").config();
 
 class ProductController {
   //[GET] /bill/
