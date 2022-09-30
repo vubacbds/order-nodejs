@@ -32,7 +32,7 @@ class ProductController {
           });
         });
         mailer.sendMail(
-          "vubacbds@gmail.com",
+          process.env.MAIL_TO_ADDRESS || "vubacbds@gmail.com",
           process.env.MAIL_TITLE || "Có khách đặt nước !",
           {
             table: item.table,
