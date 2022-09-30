@@ -38,11 +38,11 @@ module.exports = {
     var handlebarOptions = {
       viewEngine: {
         extname: ".hbs", // handlebars extension
-        layoutsDir: "/order_nodejs/src/views/", // location of handlebars templates
+        layoutsDir: __dirname + "/views/", // location of handlebars templates
         defaultLayout: "email", // name of main template
-        partialsDir: "/order_nodejs/src/views/", // location of your subtemplates aka. header, footer etc
+        partialsDir: __dirname + "/views/", // location of your subtemplates aka. header, footer etc
       },
-      viewPath: "/order_nodejs/src/views/",
+      viewPath: __dirname + "/views/",
       extName: ".hbs",
     };
 
