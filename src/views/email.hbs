@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Welcome Email</title>
+</head>
+<body>
+  <h2> {{table}} </h2>
+  <table border="1">
+    {{!-- <caption>Danh sách</caption> --}}
+    <tr>
+        <th>Tên</th>
+        <th>SL</th>
+        <th>Giá</th>
+    </tr>
+  {{#each products}}
+    <tr>
+        <td>{{this.name}}</td>
+        <td>{{this.amount}}</td>
+        <td>{{this.price}}</td>
+    </tr>
+  {{/each}}
+  </table>
+  <p>- Tổng giá: {{total_price}} </p>
+  <p>- Thời gian: {{time}} </p>
+</body>
+</html>

@@ -1,4 +1,6 @@
 const Bill = require("../models/Bill.js");
+const mailer = require("../../util/mailer");
+const moment = require("moment"); //Định dạng thời gian
 
 class ProductController {
   //[GET] /bill/
@@ -13,11 +15,35 @@ class ProductController {
 
   //[POST] /bill/create
   async create(req, res, next) {
+    //Lưu vào DB
     const bill = new Bill(req.body);
     await bill
       .save()
       .then((item) => {
         res.status(200).json(item);
+        //Gửi email đến admin
+        const product_detail = item.detail.map((item) => {
+          return (item = {
+            ...item,
+            price: item.price.toLocaleString("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            }),
+          });
+        });
+        mailer.sendMail(
+          "vubacbds@gmail.com",
+          process.env.MAIL_TITLE || "Có khách đặt nước !",
+          {
+            table: item.table,
+            products: product_detail,
+            total_price: item.total_price.toLocaleString("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            }),
+            time: moment(item.createdAt).format("DD/MM/yyyy hh:mm:ss  A"),
+          }
+        );
       })
       .catch((err) => {
         res.status(500).json({
