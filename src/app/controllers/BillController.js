@@ -22,7 +22,7 @@ class ProductController {
       .save()
       .then((item) => {
         res.status(200).json(item);
-        //Gửi email đến admin
+        //Gửi email đến admin trường hợp mới
         const product_detail = item.detail.map((item) => {
           return (item = {
             ...item,
@@ -34,7 +34,7 @@ class ProductController {
         });
         mailer.sendMail(
           process.env.MAIL_TO_ADDRESS || "vubacbds@gmail.com",
-          process.env.MAIL_TITLE || "Có khách đặt nước !",
+          `Có khách: ${req.body.table}`,
           {
             table: item.table,
             products: product_detail,
@@ -59,6 +59,30 @@ class ProductController {
     await Bill.updateOne({ _id: req.params.id }, req.body)
       .then((item) => {
         res.status(200).json(item);
+
+        //Gửi email đến admin trường hợp gọi thêm
+        const product_detail = req.body.detailTemp.map((item) => {
+          return (item = {
+            ...item,
+            price: item.price.toLocaleString("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            }),
+          });
+        });
+        mailer.sendMail(
+          process.env.MAIL_TO_ADDRESS || "vubacbds@gmail.com",
+          `Có khách: ${req.body.table} (Đặt tiếp)`,
+          {
+            table: req.body.table,
+            products: product_detail,
+            total_price: req.body.total_price.toLocaleString("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            }),
+            time: moment(req.body.createdAt).format("DD/MM/yyyy hh:mm:ss  A"),
+          }
+        );
       })
       .catch((next) =>
         res.status(200).json({
