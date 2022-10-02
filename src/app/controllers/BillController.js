@@ -61,28 +61,31 @@ class ProductController {
         res.status(200).json(item);
 
         //Gửi email đến admin trường hợp gọi thêm
-        const product_detail = req.body.detailTemp.map((item) => {
-          return (item = {
-            ...item,
-            price: item.price.toLocaleString("vi-VN", {
-              style: "currency",
-              currency: "VND",
-            }),
+        //Nếu như chỉnh sửa status từ false thành true thì không cần gửi mail
+        if (req.body.detail) {
+          const product_detail = req.body.detailTemp.map((item) => {
+            return (item = {
+              ...item,
+              price: item.price.toLocaleString("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              }),
+            });
           });
-        });
-        mailer.sendMail(
-          process.env.MAIL_TO_ADDRESS || "vubacbds@gmail.com",
-          `Có khách: ${req.body.table} (Đặt tiếp)`,
-          {
-            table: req.body.table,
-            products: product_detail,
-            total_price: req.body.total_price.toLocaleString("vi-VN", {
-              style: "currency",
-              currency: "VND",
-            }),
-            time: moment(req.body.createdAt).format("DD/MM/yyyy hh:mm:ss  A"),
-          }
-        );
+          mailer.sendMail(
+            process.env.MAIL_TO_ADDRESS || "vubacbds@gmail.com",
+            `Có khách: ${req.body.table} (Đặt tiếp)`,
+            {
+              table: req.body.table,
+              products: product_detail,
+              total_price: req.body.total_price.toLocaleString("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              }),
+              time: moment(req.body.createdAt).format("DD/MM/yyyy hh:mm:ss  A"),
+            }
+          );
+        }
       })
       .catch((next) =>
         res.status(200).json({
